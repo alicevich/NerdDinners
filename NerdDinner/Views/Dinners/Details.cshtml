@@ -1,0 +1,46 @@
+﻿@model NerdDinner.Models.Dinner
+
+<script src="/Scripts/MicrosoftAjax.js" type="text/javascript"></script>
+<script src="/Scripts/MicrosoftMvcAjax.js" type="text/javascript"></script>
+
+
+<h2>@Html.Raw(Model.Title) </h2>
+    <p>
+        <strong>When:</strong> @Model.EventDate.ToShortDateString() 
+        <strong>@@</strong>
+        @Model.EventDate.ToShortTimeString() 
+    </p>
+    <p>
+        <strong>Where:</strong>
+            @Html.Encode(Model.Address),
+            @Html.Encode(Model.Country) 
+    </p>
+    <p>
+        <strong>Description:</strong>
+            @Html.Raw(Model.Description) 
+    </p>
+    <p>
+        <strong>Organizer:</strong>
+            @Html.Encode(Model.HostedBy) 
+            (@Html.Encode(Model.ContactPhone) )
+    </p>
+@if(Model.IsHostedBy(Context.User.Identity.Name)) {
+        @Html.ActionLink("Edit Dinner", "Edit", new { id=Model.DinnerID })
+        @Html.ActionLink("Delete Dinner","Delete", new { id=Model.DinnerID})
+}
+
+<div id="rsvpmsg">
+@if (Request.IsAuthenticated) { 
+    if (Model.IsUserRegistered(Context.User.Identity.Name)) { 
+        <p>You are registered for this event!</p>
+    } else { 
+        @Ajax.ActionLink("RSVP for this event", 
+            "Register", 
+            "RSVP",
+            new { id=Model.DinnerID },
+            new AjaxOptions { UpdateTargetId="rsvpmsg"}) 
+    } 
+} else { 
+    <p><a href="/Account/Login">Log in</a> to RSVP for this event.</p>
+} 
+</div>
