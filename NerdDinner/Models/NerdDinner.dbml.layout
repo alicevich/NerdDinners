@@ -14,7 +14,7 @@
         <elementListCompartment Id="71e86a4e-c29f-48f5-bcdb-89e500970db7" absoluteBounds="0.765, 1.46, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.75 : 2.31814697265625); (3.5 : 2.31814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 2.31814697265625); (3.5 : 2.31814697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/NerdDinnerDataContext/Dinner/Dinner_RSVP" />
       <nodes>
         <classShapeMoniker Id="5cb3e85d-b0bf-4bd4-a022-815d0c4b6cfe" />

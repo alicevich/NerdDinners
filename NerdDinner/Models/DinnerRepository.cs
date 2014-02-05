@@ -5,7 +5,7 @@ using System.Web;
 
 namespace NerdDinner.Models
 {
-    public class DinnerRepository
+    public class DinnerRepository : IDinnerRepository
     {
         private readonly NerdDinnerDataContext db = new NerdDinnerDataContext();
         //
@@ -46,6 +46,15 @@ namespace NerdDinner.Models
         public void Save()
         {
             db.SubmitChanges();
+        }
+
+        public IQueryable<Dinner> FindByLocation(float latitude, float longitude)
+        {
+            var dinners = from dinner in FindUpcomingDinners()
+                          join i in db.NearestDinners(latitude, longitude)
+                          on dinner.DinnerID equals i.DinnerID
+                          select dinner;
+            return dinners;
         }
     }
 }

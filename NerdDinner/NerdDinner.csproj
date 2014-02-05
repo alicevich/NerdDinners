@@ -186,6 +186,7 @@
     <Compile Include="Controllers\DinnersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RSVPController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -195,6 +196,7 @@
     <Compile Include="Models\Dinner.cs" />
     <Compile Include="Models\DinnerFormViewModel.cs" />
     <Compile Include="Models\DinnerRepository.cs" />
+    <Compile Include="Models\IDinnerRepository.cs" />
     <Compile Include="Models\NerdDinner.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -283,6 +285,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
+    <Content Include="Scripts\Map.js" />
     <Content Include="Scripts\MicrosoftAjax.debug.js" />
     <Content Include="Scripts\MicrosoftAjax.js" />
     <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
@@ -338,6 +341,9 @@
     <Content Include="Views\Dinners\Index.cshtml" />
     <Content Include="Views\Dinners\Edit.cshtml" />
     <Content Include="Views\Dinners\Deleted.cshtml" />
+    <Content Include="Views\Dinners\RSVPStatus.cshtml" />
+    <Content Include="Views\Dinners\EditAndDeleteLinks.cshtml" />
+    <Content Include="Views\Dinners\Map.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

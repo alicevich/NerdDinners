@@ -5,6 +5,8 @@
         <title>@ViewBag.Title - My ASP.NET MVC Application</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
+        <script src="/Scripts/jquery-1.8.2.js" type="text/javascript"></script>
+
         @Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")
     </head>
@@ -12,7 +14,7 @@
         <header>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("NerdDinner", "Index", "Dinners")</p>
+                    <p class="site-title">@Html.ActionLink("NerdDinner", "Index", "Home")</p>
                 </div>
                 <div class="float-right">
                     <section id="login">

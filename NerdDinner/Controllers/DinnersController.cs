@@ -20,14 +20,25 @@ namespace NerdDinner.Controllers
 
     public class DinnersController : Controller
     {
-        DinnerRepository dinnerRepository = new DinnerRepository();
+        readonly IDinnerRepository _dinnerRepository;
+
+        public DinnersController() : this(new DinnerRepository())
+        {
+            
+        }
+
+        public DinnersController(IDinnerRepository repository)
+        {
+            _dinnerRepository = repository;
+        }
+
         //
         // GET: /Dinners/
         public ActionResult Index(int? page)
         {
            const int pageSize = 10;
 
-            var dinners = dinnerRepository.FindUpcomingDinners().ToList();
+            var dinners = _dinnerRepository.FindUpcomingDinners().ToList();
             //var paginatedDinners = new PaginatedList<Dinner> (dinners, page ?? 0, pageSize);
             //return View(paginatedDinners);
 
@@ -38,7 +49,7 @@ namespace NerdDinner.Controllers
         // GET: /Dinners/Details/2
         public ActionResult Details(int id)
         {
-            Dinner dinner = dinnerRepository.GetDinner(id);
+            Dinner dinner = _dinnerRepository.GetDinner(id);
             if (dinner == null)
                 return View("NotFound");
             else
@@ -50,7 +61,7 @@ namespace NerdDinner.Controllers
         [Authorize]
         public ActionResult Edit(int id)
         {
-            Dinner dinner = dinnerRepository.GetDinner(id);
+            Dinner dinner = _dinnerRepository.GetDinner(id);
             if (!dinner.IsHostedBy(User.Identity.Name))
             {
                 return View("InvalidOwner");
@@ -62,7 +73,7 @@ namespace NerdDinner.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Edit(int id, FormCollection formValues)
         {
-            Dinner dinner = dinnerRepository.GetDinner(id);
+            Dinner dinner = _dinnerRepository.GetDinner(id);
 
             if (!dinner.IsHostedBy(User.Identity.Name))
             {
@@ -71,7 +82,7 @@ namespace NerdDinner.Controllers
             try
             {
                 UpdateModel(dinner);
-                dinnerRepository.Save();
+                _dinnerRepository.Save();
                 return RedirectToAction("Details", new { id = dinner.DinnerID });
             }
             catch
@@ -106,8 +117,8 @@ namespace NerdDinner.Controllers
                     rsvp.AttendeeName = User.Identity.Name;
                     dinner.RSVPs.Add(rsvp);
 
-                    dinnerRepository.Add(dinner);
-                    dinnerRepository.Save();
+                    _dinnerRepository.Add(dinner);
+                    _dinnerRepository.Save();
 
                     return RedirectToAction("Details", new { id = dinner.DinnerID });
                 }
@@ -123,7 +134,7 @@ namespace NerdDinner.Controllers
         public ActionResult Delete(int id)
         {
             
-            Dinner dinner = dinnerRepository.GetDinner(id);
+            Dinner dinner = _dinnerRepository.GetDinner(id);
 
             if (!dinner.IsHostedBy(User.Identity.Name))
             {
@@ -142,14 +153,14 @@ namespace NerdDinner.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Delete(int id, string confirmButton)
         {
-            Dinner dinner = dinnerRepository.GetDinner(id);
+            Dinner dinner = _dinnerRepository.GetDinner(id);
             if (dinner == null)
                 return View("NotFound");
             else if (!dinner.IsHostedBy(User.Identity.Name))
                 return View("InvalidOwner");
             else
-                dinnerRepository.Delete(dinner);
-                dinnerRepository.Save();
+                _dinnerRepository.Delete(dinner);
+                _dinnerRepository.Save();
                 return View("Deleted");
         }
     }
