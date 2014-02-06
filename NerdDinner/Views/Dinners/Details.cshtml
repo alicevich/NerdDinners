@@ -4,7 +4,7 @@
 <script src="/Scripts/MicrosoftMvcAjax.js" type="text/javascript"></script>
 
 
-<h2>@Html.Raw(Model.Title) </h2>
+<h2>@Html.Raw(Model.Title)</h2>
     <p>
         <strong>When:</strong> @Model.EventDate.ToShortDateString() 
         <strong>@@</strong>
@@ -24,10 +24,6 @@
             @Html.Encode(Model.HostedBy) 
             (@Html.Encode(Model.ContactPhone) )
     </p>
-@*@if(Model.IsHostedBy(Context.User.Identity.Name)) {
-        @Html.ActionLink("Edit Dinner", "Edit", new { id=Model.DinnerID })
-        @Html.ActionLink("Delete Dinner","Delete", new { id=Model.DinnerID})
-}*@
 
 @{
     Html.RenderPartial("EditAndDeleteLinks");
@@ -36,9 +32,9 @@
 
 <div id ="mapDiv">
     <p>
-    @{
-        Html.RenderPartial("Map");
-    }
+        @{
+            Html.RenderPartial("Map");
+        }
     </p>
 </div>
 

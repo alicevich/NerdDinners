@@ -20,6 +20,7 @@ namespace NerdDinner.Controllers
     public class SearchController : Controller
     {
         DinnerRepository dinnerRepository = new DinnerRepository();
+
         //
         // AJAX: /Search/SearchByLocation
         [AcceptVerbs(HttpVerbs.Post)]

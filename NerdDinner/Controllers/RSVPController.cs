@@ -24,9 +24,7 @@ namespace NerdDinner.Controllers
                 dinner.RSVPs.Add(rsvp);
                 dinnerRepository.Save();
             }
-           
             return Content("Thanks - we'll see you there!");
         }
-
     }
 }

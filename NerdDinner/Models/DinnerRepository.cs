@@ -8,6 +8,7 @@ namespace NerdDinner.Models
     public class DinnerRepository : IDinnerRepository
     {
         private readonly NerdDinnerDataContext db = new NerdDinnerDataContext();
+
         //
         // Query Methods
         public IQueryable<Dinner> FindAllDinners()

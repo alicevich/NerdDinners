@@ -37,6 +37,7 @@ namespace NerdDinner.Models
                 return (PageIndex > 0);
             }
         }
+
         public bool HasNextPage
         {
             get

@@ -24,7 +24,6 @@ namespace NerdDinner.Controllers
 
         public DinnersController() : this(new DinnerRepository())
         {
-            
         }
 
         public DinnersController(IDinnerRepository repository)
@@ -45,6 +44,7 @@ namespace NerdDinner.Controllers
 
             return View(dinners);
         }
+
         //
         // GET: /Dinners/Details/2
         public ActionResult Details(int id)
@@ -68,6 +68,7 @@ namespace NerdDinner.Controllers
             }
             return View(new DinnerFormViewModel(dinner));
         }
+
         //
         // POST: /Dinners/Edit/2
         [AcceptVerbs(HttpVerbs.Post)]

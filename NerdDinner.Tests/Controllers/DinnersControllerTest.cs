@@ -3,34 +3,48 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 using NerdDinner.Controllers;
 using NerdDinner.Models;
-using Assert = NUnit.Framework.Assert;
+using Rhino.Mocks;
 
 namespace NerdDinner.Tests.Controllers
 {
     [TestFixture]
     public class DinnersControllerTest
     {
-       [Test]
-        public void DetailsAction_Should_Return_View_For_ExistingDinner()
+        [SetUp]
+        public void SetUp()
         {
-            // Arrange
-            var controller = new DinnersController();
-            // Act
-            var result = controller.Details(1) as ViewResult;
-            // Assert
-            Assert.IsNotNull(result, "Expected View");
+            this.stubDinnerRepository = MockRepository.GenerateStub<IDinnerRepository>();
         }
 
-        [TestMethod]
-            public void DetailsAction_Should_Return_NotFoundView_For_BogusDinner() {
+        public IDinnerRepository stubDinnerRepository { get; set; }
+        
+        [Test]
+        public void Details_ValidDinnerID_ReturnsDetailsViewForExistingDinnerID()
+        {
+            //Arrange
+            stubDinnerRepository
+                .Stub(sdr => sdr.GetDinner(2))
+                .Return(new Dinner());
+            var controller = new DinnersController(stubDinnerRepository);
+            
+           // Act
+            var result = controller.Details(1) ;
+            
+           // Assert
+            Assert.That(result, Is.Not.Null);
+        }
+
+        [Test]
+        public void Details_InvalidDinnerID_ReturnsNotFoundView() {
             // Arrange
-            var controller = new DinnersController();
+            var controller = new DinnersController(stubDinnerRepository);
+            
             // Act
             var result = controller.Details(999) as ViewResult;
+            
             // Assert
             Assert.AreEqual("NotFound", result.ViewName);
         }

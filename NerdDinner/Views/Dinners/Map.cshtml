@@ -14,6 +14,7 @@
         else
             window.LoadMap(latitude, longitude, mapLoaded);
     });
+
     function mapLoaded() {
         var title = "@Html.Encode(Model.Title)";
         var address = "@Html.Encode(Model.Address)";
