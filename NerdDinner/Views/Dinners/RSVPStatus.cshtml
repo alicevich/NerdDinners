@@ -1,0 +1,24 @@
+﻿@model NerdDinner.Models.Dinner
+
+<script type="text/javascript">
+    function AnimateRSVPMessage() {
+        $("#rsvpmsg").animate({ fontSize: "1.5em" }, 400);
+    }
+</script>
+
+<div id="rsvpmsg">
+@if (Request.IsAuthenticated) { 
+    if (Model.IsUserRegistered(Context.User.Identity.Name)) { 
+        <p>You are registered for this event!</p>
+    } else { 
+        @Ajax.ActionLink("RSVP for this event", 
+            "Register", 
+            "RSVP",
+            new { id=Model.DinnerID },
+            new AjaxOptions { UpdateTargetId="rsvpmsg",
+                              OnSuccess = "AnimateRSVPMessage" }) 
+    } 
+} else { 
+    <p><a href="/Account/Login">Log in</a> to RSVP for this event.</p>
+} 
+</div>
